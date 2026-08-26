@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portofolio mahasiswa baru Teknik Informatika - TRPL">
+  <title>Portfolio | Indra</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"]
+          },
+          colors: {
+            night: "#020617",
+            ice: "#7dd3fc"
+          },
+          boxShadow: {
+            glass: "0 25px 80px rgba(0,0,0,.38)",
+            cyan: "0 0 45px rgba(34,211,238,.18)"
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: #e2e8f0;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(37,99,235,.28), transparent 28%),
+        radial-gradient(circle at 85% 18%, rgba(8,145,178,.18), transparent 25%),
+        radial-gradient(circle at 50% 80%, rgba(79,70,229,.13), transparent 30%),
+        #020617;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: rgba(56,189,248,.35);
+      color: white;
+    }
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -3;
+      opacity: .65;
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, white, transparent),
+        radial-gradient(1px 1px at 20% 70%, white, transparent),
+        radial-gradient(1.5px 1.5px at 35% 35%, rgba(186,230,253,.9), transparent),
+        radial-gradient(1px 1px at 50% 15%, white, transparent),
+        radial-gradient(1px 1px at 62% 75%, white, transparent),
+        radial-gradient(1.5px 1.5px at 75% 28%, rgba(186,230,253,.9), transparent),
+        radial-gradient(1px 1px at 88% 65%, white, transparent),
+        radial-gradient(1px 1px at 92% 12%, white, transparent);
+      background-size: 280px 280px;
+      animation: starsMove 35s linear infinite;
+    }
+
+    @keyframes starsMove {
+      from { transform: translateY(0); }
+      to { transform: translateY(-280px); }
+    }
+
+    .nebula {
+      position: fixed;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: .13;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    .nebula.one {
+      background: #0ea5e9;
+      left: -230px;
+      top: 10%;
+    }
+
+    .nebula.two {
+      background: #2563eb;
+      right: -260px;
+      top: 35%;
+    }
+
+    .nebula.three {
+      background: #6366f1;
+      left: 35%;
+      bottom: -300px;
+    }
+
+    .glass {
+      background: linear-gradient(
+        135deg,
+        rgba(255,255,255,.105),
+        rgba(255,255,255,.035)
+      );
+      border: 1px solid rgba(255,255,255,.13);
+      box-shadow:
+        0 25px 80px rgba(0,0,0,.28),
+        inset 0 1px 0 rgba(255,255,255,.08);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .glass-dark {
+      background: rgba(2,6,23,.48);
+      border: 1px solid rgba(148,163,184,.12);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #fff 0%, #bae6fd 42%, #38bdf8 72%, #60a5fa 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .gradient-border {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .gradient-border::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(56,189,248,.65), transparent 35%, rgba(99,102,241,.4));
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .hero-grid {
+      background-image:
+        linear-gradient(rgba(125,211,252,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(125,211,252,.045) 1px, transparent 1px);
+      background-size: 55px 55px;
+      mask-image: radial-gradient(circle at center, black, transparent 75%);
+    }
+
+    .orbit {
+      position: absolute;
+      border: 1px solid rgba(125,211,252,.16);
+      border-radius: 50%;
+      transform: rotate(-15deg);
+    }
+
+    .orbit::after {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #38bdf8;
+      box-shadow: 0 0 30px 8px rgba(56,189,248,.45);
+      top: 4%;
+      right: 15%;
+    }
+
+    .orbit-a {
+      width: 540px;
+      height: 210px;
+      animation: orbitFloat 7s ease-in-out infinite;
+    }
+
+    .orbit-b {
+      width: 410px;
+      height: 165px;
+      transform: rotate(42deg);
+      animation: orbitFloat 9s ease-in-out infinite reverse;
+    }
+
+    @keyframes orbitFloat {
+      0%,100% { transform: rotate(-15deg) translateY(0); }
+      50% { transform: rotate(-15deg) translateY(-10px); }
+    }
+
+    .profile-card {
+      transform-style: preserve-3d;
+      transition: transform .2s ease;
+    }
+
+    .profile-card .depth {
+      transform: translateZ(35px);
+    }
+
+    .shine {
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(125,211,252,.18), transparent 68%);
+      filter: blur(4px);
+      pointer-events: none;
+      transform: translate(-50%,-50%);
+      opacity: 0;
+      transition: opacity .2s ease;
+    }
+
+    .profile-card:hover .shine { opacity: 1; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .75s ease, transform .75s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .nav-link {
+      position: relative;
+      transition: color .25s ease;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -8px;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: #38bdf8;
+      transform: translateX(-50%);
+      transition: width .25s ease;
+    }
+
+    .nav-link.active,
+    .nav-link:hover {
+      color: #7dd3fc;
+    }
+
+    .nav-link.active::after { width: 22px; }
+
+    .gallery-card img {
+      transition: transform .65s cubic-bezier(.2,.8,.2,1), filter .65s ease;
+    }
+
+    .gallery-card:hover img {
+      transform: scale(1.08);
+      filter: saturate(1.15);
+    }
+
+    .input {
+      width: 100%;
+      border-radius: 15px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(15,23,42,.52);
+      color: white;
+      padding: 13px 15px;
+      outline: none;
+      transition: .2s ease;
+    }
+
+    .input::placeholder { color: #64748b; }
+
+    .input:focus {
+      border-color: rgba(56,189,248,.6);
+      box-shadow: 0 0 0 4px rgba(56,189,248,.08);
+    }
+
+    .section-label {
+      letter-spacing: .28em;
+      color: #7dd3fc;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .skill-pill {
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .skill-pill:hover {
+      transform: translateY(-3px);
+      background: rgba(56,189,248,.1);
+    }
+
+    .timeline-line {
+      background: linear-gradient(to bottom, rgba(56,189,248,.7), rgba(56,189,248,0));
+    }
+
+    @media (max-width: 768px) {
+      .orbit-a { width: 360px; height: 150px; }
+      .orbit-b { width: 280px; height: 120px; }
+    }
+  </style>
+</head>
+
+<body class="font-sans">
+
+  <div class="stars"></div>
+  <div class="nebula one"></div>
+  <div class="nebula two"></div>
+  <div class="nebula three"></div>
+
+  <!-- NAVBAR -->
+  <header class="fixed top-0 left-0 right-0 z-50">
+    <nav class="max-w-6xl mx-auto px-4 sm:px-6 pt-4">
+      <div class="glass rounded-2xl px-4 py-3 flex items-center justify-between">
+
+        <a href="#home" class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-400 to-blue-600 grid place-items-center shadow-cyan">
+            <i data-lucide="orbit" class="w-5 h-5 text-white"></i>
+          </div>
+          <div>
+            <span class="font-bold text-white">My</span><span class="font-bold text-sky-300">Portfolio</span>
+            <span class="hidden sm:inline text-[10px] text-slate-500 ml-2">/ TRPL</span>
+          </div>
+        </a>
+
+        <div class="hidden md:flex items-center gap-8 text-sm text-slate-400">
+          <a class="nav-link active" href="#home">Home</a>
+          <a class="nav-link" href="#about">About</a>
+          <a class="nav-link" href="#gallery">Gallery</a>
+          <a class="nav-link" href="#contact">Contact</a>
+        </div>
+
+        <a href="#contact"
+           class="hidden sm:inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-sky-500 to-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-sky-500/20 hover:scale-[1.03] transition">
+          Let's Talk <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+        </a>
+
+        <button id="menuBtn"
+                class="md:hidden w-10 h-10 rounded-xl glass grid place-items-center"
+                aria-label="Buka menu">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div id="mobileMenu" class="hidden md:hidden mt-2 glass rounded-2xl p-3">
+        <a href="#home" class="block px-4 py-3 rounded-xl hover:bg-white/5">Home</a>
+        <a href="#about" class="block px-4 py-3 rounded-xl hover:bg-white/5">About</a>
+        <a href="#gallery" class="block px-4 py-3 rounded-xl hover:bg-white/5">Gallery</a>
+        <a href="#contact" class="block px-4 py-3 rounded-xl hover:bg-white/5">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ================= HOME ================= -->
+    <section id="home" class="min-h-screen relative overflow-hidden flex items-center pt-32 pb-20">
+
+      <div class="absolute inset-0 hero-grid pointer-events-none"></div>
+
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 w-full relative">
+        <div class="grid lg:grid-cols-[1.08fr_.92fr] gap-14 items-center">
+
+          <!-- Hero text -->
+          <div class="reveal">
+            <div class="inline-flex items-center gap-2 glass rounded-full px-4 py-2 mb-6 text-xs text-sky-200">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              Mahasiswa Baru • Open to Learn
+            </div>
+
+            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black leading-[.98] tracking-tight text-white">
+              Halo, saya
+              <span class="gradient-text">Indra.</span>
+            </h1>
+
+            <p class="mt-6 max-w-2xl text-base sm:text-lg text-slate-300 leading-relaxed">
+              Mahasiswa baru <span class="text-sky-300 font-semibold">Teknik Informatika — TRPL</span>
+              yang sedang memulai perjalanan di dunia pemrograman, teknologi, dan pengembangan software.
+            </p>
+
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a href="#about"
+                 class="inline-flex items-center gap-2 rounded-full bg-white text-slate-950 px-6 py-3.5 font-bold hover:bg-sky-100 transition">
+                Tentang Saya
+                <i data-lucide="arrow-down" class="w-4 h-4"></i>
+              </a>
+
+              <a href="#gallery"
+                 class="inline-flex items-center gap-2 glass rounded-full px-6 py-3.5 font-semibold text-white hover:bg-white/10 transition">
+                <i data-lucide="images" class="w-4 h-4 text-sky-300"></i>
+                Lihat Gallery
+              </a>
+            </div>
+
+            <div class="mt-10 flex flex-wrap gap-x-7 gap-y-3 text-xs sm:text-sm text-slate-500">
+              <span class="flex items-center gap-2">
+                <i data-lucide="map-pin" class="w-4 h-4 text-sky-400"></i>
+                Universitas Pendidikan Ganesha
+              </span>
+              <span class="flex items-center gap-2">
+                <i data-lucide="code-2" class="w-4 h-4 text-sky-400"></i>
+                TRPL
+              </span>
+              <span class="flex items-center gap-2">
+                <i data-lucide="rocket" class="w-4 h-4 text-sky-400"></i>
+                Learning Mode
+              </span>
+            </div>
+          </div>
+
+          <!-- Hero visual -->
+          <div class="reveal flex justify-center">
+            <div id="profileCard"
+                 class="profile-card gradient-border glass rounded-[2rem] p-4 w-full max-w-md relative overflow-hidden">
+
+              <div id="shine" class="shine"></div>
+
+              <div class="absolute inset-0 pointer-events-none overflow-hidden rounded-[2rem]">
+                <div class="orbit orbit-a left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+                <div class="orbit orbit-b left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+              </div>
+
+              <div class="relative rounded-[1.5rem] overflow-hidden bg-slate-950/80 aspect-[4/5]">
+
+                <!-- GANTI FOTO PROFIL DI SINI -->
+                <img
+                  src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=1000&q=90"
+                  alt="Foto profil"
+                  class="w-full h-full object-cover opacity-90"
+                >
+
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/10 to-transparent"></div>
+
+                <div class="absolute top-5 left-5 right-5 flex justify-between items-center">
+                  <span class="glass rounded-full px-3 py-1.5 text-[10px] uppercase tracking-[.2em] text-sky-200">
+                    Student Profile
+                  </span>
+                  <span class="w-9 h-9 glass rounded-full grid place-items-center">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-sky-300"></i>
+                  </span>
+                </div>
+
+                <div class="absolute bottom-5 left-5 right-5 depth">
+                  <div class="glass rounded-2xl p-5">
+                    <p class="section-label !tracking-[.18em]">Currently Exploring</p>
+                    <h2 class="mt-2 text-2xl font-bold text-white">Technology & Creativity</h2>
+
+                    <div class="mt-4 flex flex-wrap gap-2">
+                      <span class="skill-pill rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-slate-300">HTML</span>
+                      <span class="skill-pill rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-slate-300">Tailwind</span>
+                      <span class="skill-pill rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-slate-300">JavaScript</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================= ABOUT ================= -->
+    <section id="about" class="py-28">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+        <div class="reveal mb-12">
+          <p class="section-label">01 — About Me</p>
+          <h2 class="mt-3 text-4xl sm:text-5xl font-black text-white">Sedikit tentang saya.</h2>
+          <p class="mt-4 max-w-2xl text-slate-400 leading-relaxed">
+            Bagian ini bisa kamu gunakan untuk memperkenalkan diri sebagai mahasiswa baru,
+            alasan memilih jurusan, cita-cita, dan hal yang sedang dipelajari.
+          </p>
+        </div>
+
+        <div class="grid lg:grid-cols-[.85fr_1.15fr] gap-6">
+
+          <!-- Biodata -->
+          <div class="glass rounded-3xl p-7 reveal">
+            <div class="flex items-center gap-4">
+              <div class="w-14 h-14 rounded-2xl bg-sky-400/10 border border-sky-300/10 grid place-items-center">
+                <i data-lucide="user-round" class="w-6 h-6 text-sky-300"></i>
+              </div>
+              <div>
+                <p class="text-xs uppercase tracking-[.18em] text-slate-500">Identity</p>
+                <h3 class="text-xl font-bold text-white">Biodata Diri</h3>
+              </div>
+            </div>
+
+            <div class="mt-7 space-y-4 text-sm">
+              <div class="flex justify-between gap-5 border-b border-white/10 pb-3">
+                <span class="text-slate-500">Nama</span>
+                <span class="text-white text-right">Nama Lengkap Kamu</span>
+              </div>
+
+              <div class="flex justify-between gap-5 border-b border-white/10 pb-3">
+                <span class="text-slate-500">Nama Panggilan</span>
+                <span class="text-white text-right">Nama Panggilan</span>
+              </div>
+
+              <div class="flex justify-between gap-5 border-b border-white/10 pb-3">
+                <span class="text-slate-500">NIM</span>
+                <span class="text-white text-right">XXXXXXXXXX</span>
+              </div>
+
+              <div class="flex justify-between gap-5 border-b border-white/10 pb-3">
+                <span class="text-slate-500">Program Studi</span>
+                <span class="text-white text-right">TRPL</span>
+              </div>
+
+              <div class="flex justify-between gap-5 border-b border-white/10 pb-3">
+                <span class="text-slate-500">Asal Sekolah</span>
+                <span class="text-white text-right">Nama Sekolah</span>
+              </div>
+
+              <div class="flex justify-between gap-5">
+                <span class="text-slate-500">Hobi</span>
+                <span class="text-white text-right">Gaming • Musik • Coding</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Story -->
+          <div class="glass rounded-3xl p-7 reveal">
+            <div class="grid sm:grid-cols-2 gap-5">
+
+              <div class="glass-dark rounded-2xl p-5">
+                <div class="w-10 h-10 rounded-xl bg-blue-400/10 grid place-items-center">
+                  <i data-lucide="lightbulb" class="w-5 h-5 text-sky-300"></i>
+                </div>
+                <p class="mt-4 text-sm font-bold text-sky-300">Alasan Memilih Informatika</p>
+                <p class="mt-3 text-sm text-slate-400 leading-relaxed">
+                  Saya tertarik dengan perkembangan teknologi dan ingin belajar bagaimana
+                  sebuah ide dapat dibuat menjadi aplikasi yang bermanfaat.
+                </p>
+              </div>
+
+              <div class="glass-dark rounded-2xl p-5">
+                <div class="w-10 h-10 rounded-xl bg-cyan-400/10 grid place-items-center">
+                  <i data-lucide="layers-3" class="w-5 h-5 text-sky-300"></i>
+                </div>
+                <p class="mt-4 text-sm font-bold text-sky-300">Alasan Memilih TRPL</p>
+                <p class="mt-3 text-sm text-slate-400 leading-relaxed">
+                  TRPL menarik karena saya ingin memahami proses pengembangan software
+                  dari tahap perencanaan sampai menjadi produk yang dapat digunakan.
+                </p>
+              </div>
+
+              <div class="sm:col-span-2 rounded-2xl border border-sky-400/15 bg-sky-400/[.045] p-5">
+                <div class="flex gap-4">
+                  <div class="w-10 h-10 shrink-0 rounded-xl bg-sky-400/10 grid place-items-center">
+                    <i data-lucide="target" class="w-5 h-5 text-sky-300"></i>
+                  </div>
+                  <div>
+                    <p class="text-sm font-bold text-sky-300">Cita-cita</p>
+                    <p class="mt-2 text-white text-lg font-semibold">
+                      Menjadi software developer yang kreatif, kompeten, dan terus berkembang.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Learning cards -->
+        <div class="mt-6 grid md:grid-cols-3 gap-5">
+
+          <div class="glass rounded-2xl p-6 reveal hover:-translate-y-1 transition">
+            <div class="flex items-center justify-between">
+              <span class="w-11 h-11 rounded-xl bg-sky-400/10 grid place-items-center">
+                <i data-lucide="globe-2" class="w-5 h-5 text-sky-300"></i>
+              </span>
+              <span class="text-xs text-slate-600">01</span>
+            </div>
+            <h3 class="mt-5 font-bold text-white text-lg">Web Development</h3>
+            <p class="mt-2 text-sm text-slate-400 leading-relaxed">
+              Sedang mempelajari HTML, CSS, Tailwind CSS, JavaScript, dan cara membuat website responsif.
+            </p>
+          </div>
+
+          <div class="glass rounded-2xl p-6 reveal hover:-translate-y-1 transition">
+            <div class="flex items-center justify-between">
+              <span class="w-11 h-11 rounded-xl bg-blue-400/10 grid place-items-center">
+                <i data-lucide="gamepad-2" class="w-5 h-5 text-sky-300"></i>
+              </span>
+              <span class="text-xs text-slate-600">02</span>
+            </div>
+            <h3 class="mt-5 font-bold text-white text-lg">Game Development</h3>
+            <p class="mt-2 text-sm text-slate-400 leading-relaxed">
+              Tertarik mengeksplorasi Unity dan suatu saat membuat game interaktif, termasuk pengalaman VR.
+            </p>
+          </div>
+
+          <div class="glass rounded-2xl p-6 reveal hover:-translate-y-1 transition">
+            <div class="flex items-center justify-between">
+              <span class="w-11 h-11 rounded-xl bg-indigo-400/10 grid place-items-center">
+                <i data-lucide="rocket" class="w-5 h-5 text-sky-300"></i>
+              </span>
+              <span class="text-xs text-slate-600">03</span>
+            </div>
+            <h3 class="mt-5 font-bold text-white text-lg">Future Project</h3>
+            <p class="mt-2 text-sm text-slate-400 leading-relaxed">
+              Membangun project yang bukan hanya keren, tetapi juga memiliki manfaat dan menyelesaikan masalah.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================= GALLERY ================= -->
+    <section id="gallery" class="py-28">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+        <div class="reveal mb-12">
+          <p class="section-label">02 — Gallery</p>
+          <h2 class="mt-3 text-4xl sm:text-5xl font-black text-white">Dokumentasi perjalanan.</h2>
+          <p class="mt-4 max-w-2xl text-slate-400">
+            Tampilkan kegiatan kuliah, orientasi, kegiatan bersama teman, maupun dokumentasi project.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-5">
+
+          <!-- FOTO 1 -->
+          <button
+            class="gallery-card glass rounded-3xl overflow-hidden text-left reveal"
+            data-title="Kegiatan Perkuliahan"
+            data-image="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1400&q=90">
+
+            <div class="aspect-[4/3] overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1000&q=90"
+                alt="Kegiatan perkuliahan"
+                class="w-full h-full object-cover">
+            </div>
+
+            <div class="p-5">
+              <p class="text-[10px] uppercase tracking-[.2em] text-sky-300">Dokumentasi 01</p>
+              <h3 class="mt-2 text-lg font-bold text-white">Kegiatan Perkuliahan</h3>
+              <p class="mt-1 text-sm text-slate-500">Campus life & learning</p>
+            </div>
+          </button>
+
+          <!-- FOTO 2 -->
+          <button
+            class="gallery-card glass rounded-3xl overflow-hidden text-left reveal"
+            data-title="Bersama Teman"
+            data-image="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1400&q=90">
+
+            <div class="aspect-[4/3] overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1000&q=90"
+                alt="Bersama teman"
+                class="w-full h-full object-cover">
+            </div>
+
+            <div class="p-5">
+              <p class="text-[10px] uppercase tracking-[.2em] text-sky-300">Dokumentasi 02</p>
+              <h3 class="mt-2 text-lg font-bold text-white">Bersama Teman</h3>
+              <p class="mt-1 text-sm text-slate-500">Memories & friendship</p>
+            </div>
+          </button>
+
+          <!-- FOTO 3 -->
+          <button
+            class="gallery-card glass rounded-3xl overflow-hidden text-left reveal"
+            data-title="Eksplorasi Teknologi"
+            data-image="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=90">
+
+            <div class="aspect-[4/3] overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1000&q=90"
+                alt="Eksplorasi teknologi"
+                class="w-full h-full object-cover">
+            </div>
+
+            <div class="p-5">
+              <p class="text-[10px] uppercase tracking-[.2em] text-sky-300">Dokumentasi 03</p>
+              <h3 class="mt-2 text-lg font-bold text-white">Eksplorasi Teknologi</h3>
+              <p class="mt-1 text-sm text-slate-500">Learning & creativity</p>
+            </div>
+          </button>
+
+        </div>
+
+        <div class="mt-6 glass rounded-2xl p-5 reveal flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>
+            <p class="text-white font-semibold">Punya dokumentasi lain?</p>
+            <p class="text-sm text-slate-500 mt-1">Tambahkan sebanyak yang kamu mau di bagian Gallery.</p>
+          </div>
+          <span class="rounded-full border border-sky-400/15 bg-sky-400/5 px-4 py-2 text-xs text-sky-300">
+            03 Photos • Ready
+          </span>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================= CONTACT ================= -->
+    <section id="contact" class="py-28">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+        <div class="reveal mb-12">
+          <p class="section-label">03 — Contact</p>
+          <h2 class="mt-3 text-4xl sm:text-5xl font-black text-white">Let's connect.</h2>
+          <p class="mt-4 max-w-2xl text-slate-400">
+            Hubungi saya melalui media sosial atau gunakan form di samping.
+          </p>
+        </div>
+
+        <div class="grid lg:grid-cols-[.78fr_1.22fr] gap-6">
+
+          <!-- Social -->
+          <div class="glass rounded-3xl p-7 reveal">
+            <p class="text-xl font-bold text-white">Find me here.</p>
+            <p class="mt-2 text-sm text-slate-500">
+              Ganti link dan username di bawah dengan akun kamu.
+            </p>
+
+            <div class="mt-7 space-y-3">
+
+              <a href="mailto:com"
+                 class="glass-dark rounded-2xl p-4 flex items-center gap-4 hover:bg-white/10 transition group">
+                <span class="w-11 h-11 rounded-xl bg-white/5 grid place-items-center">
+                  <i data-lucide="mail" class="w-5 h-5 text-sky-300"></i>
+                </span>
+                <div class="flex-1">
+                  <p class="text-xs text-slate-600">EMAIL</p>
+                  <p class="text-sm text-white">gustiketutjyestaindrawan@gmail.com</p>
+                </div>
+                <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-600 group-hover:text-sky-300"></i>
+              </a>
+
+              <a href="https://instagram.com/" target="_blank"
+                 class="glass-dark rounded-2xl p-4 flex items-center gap-4 hover:bg-white/10 transition group">
+                <span class="w-11 h-11 rounded-xl bg-white/5 grid place-items-center">
+                  <i data-lucide="instagram" class="w-5 h-5 text-sky-300"></i>
+                </span>
+                <div class="flex-1">
+                  <p class="text-xs text-slate-600">INSTAGRAM</p>
+                  <p class="text-sm text-white">@usernamekamu</p>
+                </div>
+                <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-600 group-hover:text-sky-300"></i>
+              </a>
+
+              <a href="https://linkedin.com/" target="_blank"
+                 class="glass-dark rounded-2xl p-4 flex items-center gap-4 hover:bg-white/10 transition group">
+                <span class="w-11 h-11 rounded-xl bg-white/5 grid place-items-center">
+                  <i data-lucide="linkedin" class="w-5 h-5 text-sky-300"></i>
+                </span>
+                <div class="flex-1">
+                  <p class="text-xs text-slate-600">LINKEDIN</p>
+                  <p class="text-sm text-white">linkedin.com/in/username</p>
+                </div>
+                <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-600 group-hover:text-sky-300"></i>
+              </a>
+
+            </div>
+
+            <div class="mt-6 rounded-2xl border border-emerald-400/10 bg-emerald-400/[.04] p-4 flex gap-3">
+              <span class="w-8 h-8 rounded-lg bg-emerald-400/10 grid place-items-center shrink-0">
+                <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
+              </span>
+              <div>
+                <p class="text-sm text-emerald-300 font-semibold">Available to connect</p>
+                <p class="text-xs text-slate-500 mt-1">Open untuk belajar dan berkolaborasi.</p>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Contact form -->
+          <form id="contactForm" class="glass rounded-3xl p-7 reveal">
+
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm text-slate-300 mb-2" for="name">Nama</label>
+                <input class="input" id="name" name="name" type="text"
+                       placeholder="Indra" required>
+              </div>
+
+              <div>
+                <label class="block text-sm text-slate-300 mb-2" for="email">Email</label>
+                <input class="input" id="email" name="email" type="email"
+                       placeholder="email@example.com" required>
+              </div>
+            </div>
+
+            <div class="mt-4">
+              <label class="block text-sm text-slate-300 mb-2" for="subject">Subjek</label>
+              <input class="input" id="subject" name="subject" type="text"
+                     placeholder="Contoh: Project / Kolaborasi" required>
+            </div>
+
+            <div class="mt-4">
+              <label class="block text-sm text-slate-300 mb-2" for="message">Pesan</label>
+              <textarea class="input min-h-40 resize-y" id="message" name="message"
+                        placeholder="Tulis pesan kamu..." required></textarea>
+            </div>
+
+            <button type="submit"
+                    class="mt-5 w-full rounded-2xl bg-gradient-to-r from-sky-500 to-blue-600 py-3.5 font-bold text-white shadow-lg shadow-sky-500/15 hover:brightness-110 hover:-translate-y-0.5 transition flex items-center justify-center gap-2">
+              Kirim Pesan
+              <i data-lucide="send" class="w-4 h-4"></i>
+            </button>
+
+            <p id="formStatus" class="hidden mt-4 text-center text-sm text-emerald-300"></p>
+          </form>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer class="border-t border-white/10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-9 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="text-sm text-slate-600">
+        © <span id="year"></span> Indra. Built with HTML + Tailwind + JS.
+      </div>
+
+      <a href="#home" class="text-sm text-slate-500 hover:text-sky-300 transition flex items-center gap-2">
+        Back to top
+        <i data-lucide="arrow-up" class="w-4 h-4"></i>
+      </a>
+    </div>
+  </footer>
+
+
+  <!-- GALLERY MODAL -->
+  <div id="galleryModal"
+       class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/85 backdrop-blur-md p-4">
+
+    <div class="glass rounded-3xl overflow-hidden max-w-5xl w-full relative">
+      <button id="closeModal"
+              class="absolute z-10 top-4 right-4 w-10 h-10 rounded-full bg-slate-950/70 border border-white/10 grid place-items-center text-white hover:bg-slate-900">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <img id="modalImage" src="" alt=""
+           class="w-full max-h-[75vh] object-contain bg-slate-950/60">
+
+      <div class="p-5">
+        <p class="section-label">Gallery Preview</p>
+        <h3 id="modalTitle" class="mt-2 text-xl font-bold text-white"></h3>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- TOAST -->
+  <div id="toast"
+       class="fixed z-[120] bottom-5 right-5 hidden glass rounded-2xl px-5 py-4 text-sm text-white shadow-glass">
+  </div>
+
+
+  <script>
+    // ================================
+    // ICONS
+    // ================================
+    lucide.createIcons();
+
+
+    // ================================
+    // MOBILE MENU
+    // ================================
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+
+    mobileMenu.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+      });
+    });
+
+
+    // ================================
+    // SCROLL REVEAL
+    // ================================
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12
+    });
+
+    document.querySelectorAll(".reveal").forEach(el => {
+      revealObserver.observe(el);
+    });
+
+
+    // ================================
+    // ACTIVE NAVIGATION
+    // ================================
+    const sections = document.querySelectorAll("main section[id]");
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => {
+            link.classList.toggle(
+              "active",
+              link.getAttribute("href") === "#" + entry.target.id
+            );
+          });
+        }
+      });
+    }, {
+      rootMargin: "-35% 0px -55% 0px"
+    });
+
+    sections.forEach(section => {
+      sectionObserver.observe(section);
+    });
+
+
+    // ================================
+    // 3D PROFILE CARD
+    // ================================
+    const profileCard = document.getElementById("profileCard");
+    const shine = document.getElementById("shine");
+
+    if (profileCard && window.matchMedia("(pointer:fine)").matches) {
+      profileCard.addEventListener("mousemove", (event) => {
+        const rect = profileCard.getBoundingClientRect();
+
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        const rotateY = ((x / rect.width) - 0.5) * 8;
+        const rotateX = ((y / rect.height) - 0.5) * -8;
+
+        profileCard.style.transform =
+          `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
+        shine.style.left = x + "px";
+        shine.style.top = y + "px";
+      });
+
+      profileCard.addEventListener("mouseleave", () => {
+        profileCard.style.transform =
+          "perspective(1000px) rotateX(0deg) rotateY(0deg)";
+      });
+    }
+
+
+    // ================================
+    // GALLERY MODAL
+    // ================================
+    const galleryModal = document.getElementById("galleryModal");
+    const modalImage = document.getElementById("modalImage");
+    const modalTitle = document.getElementById("modalTitle");
+    const closeModal = document.getElementById("closeModal");
+
+    document.querySelectorAll(".gallery-card").forEach(card => {
+      card.addEventListener("click", () => {
+        modalImage.src = card.dataset.image;
+        modalImage.alt = card.dataset.title;
+        modalTitle.textContent = card.dataset.title;
+
+        galleryModal.classList.remove("hidden");
+        galleryModal.classList.add("flex");
+        document.body.style.overflow = "hidden";
+      });
+    });
+
+    function hideModal() {
+      galleryModal.classList.add("hidden");
+      galleryModal.classList.remove("flex");
+      document.body.style.overflow = "";
+    }
+
+    closeModal.addEventListener("click", hideModal);
+
+    galleryModal.addEventListener("click", (event) => {
+      if (event.target === galleryModal) {
+        hideModal();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        hideModal();
+      }
+    });
+
+
+    // ================================
+    // CONTACT FORM
+    // ================================
+    const contactForm = document.getElementById("contactForm");
+    const formStatus = document.getElementById("formStatus");
+    const toast = document.getElementById("toast");
+
+    contactForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      formStatus.textContent =
+        "Pesan berhasil divalidasi. Hubungkan form ke backend/Formspree jika ingin menerima pesan sungguhan.";
+      formStatus.classList.remove("hidden");
+
+      toast.textContent = "Pesan siap diproses ✦";
+      toast.classList.remove("hidden");
+
+      setTimeout(() => {
+        toast.classList.add("hidden");
+      }, 3000);
+
+      contactForm.reset();
+    });
+
+
+    // ================================
+    // YEAR
+    // ================================
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
